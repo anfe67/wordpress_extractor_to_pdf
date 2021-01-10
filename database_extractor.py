@@ -145,7 +145,7 @@ def ideas_extractor():
                 record["votes"] = votes_record[0]
 
             # Images lookup
-            images= set()
+            images = set()
             sql_string = sql_images + str(record['ID'])
             cursor2.execute(sql_string)
             image_records = cursor2.fetchall()
@@ -174,7 +174,6 @@ def ideas_extractor():
             record['thumbnail'] = thumbnail_resource
 
             # date
-
 
             # Shall use thumbnails or images...
             # note: Text remains to be cleaned from html tags (maybe) during processing
@@ -205,6 +204,6 @@ def test_extraction():
         print(idea)
     print(f"There are {french} ideas in French and {dutch} ideas in Dutch.")
 
-#if __name__ == "main":
-test_extraction()
 
+# if __name__ == "main":
+test_extraction()
