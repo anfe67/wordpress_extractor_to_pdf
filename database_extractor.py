@@ -21,16 +21,18 @@ this.user = config['WP_DB']['user']
 this.password = config['WP_DB']['password']
 this.prefix = config['WP_DB']['table_prefix']
 
-# DB QUERIES
-# To get all posts of a certain type from the WP db
 sql_all_ideas = f"select posts.ID , " \
+                f"guid as url, " \
                 f"posts.post_title, " \
-                f"posts.guid," \
                 f"post_content, " \
+                f"post_name, " \
+                f"DATE_FORMAT(post_date, '%Y-%m-%d %H:%S') as post_date," \
                 f"users.user_nicename " \
                 f"from {this.prefix}_posts posts inner join " \
                 f"{this.prefix}_users users on posts.post_author = users.ID " \
                 f"where posts.post_type ='idea'"
+# DB QUERIES
+# To get all posts of a certain type from the WP db
 
 # to get number of votes for an idea (to finish with post ID)
 sql_votes = f"select meta_value from {this.prefix}_postmeta where meta_key='votes' and post_id="
@@ -171,6 +173,8 @@ def ideas_extractor():
 
             record['thumbnail'] = thumbnail_resource
 
+            # date
+
 
             # Shall use thumbnails or images...
             # note: Text remains to be cleaned from html tags (maybe) during processing
@@ -203,3 +207,4 @@ def test_extraction():
 
 #if __name__ == "main":
 test_extraction()
+
